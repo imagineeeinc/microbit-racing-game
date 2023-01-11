@@ -56,8 +56,8 @@ basic.forever(function () {
         }
         ticks += 1
     }
-    for (let value of obstacles) {
-        if (value.get(LedSpriteProperty.Y) == car.get(LedSpriteProperty.Y) && value.get(LedSpriteProperty.X) == car.get(LedSpriteProperty.X)) {
+    for (let value2 of obstacles) {
+        if (value2.get(LedSpriteProperty.Y) == car.get(LedSpriteProperty.Y) && value2.get(LedSpriteProperty.X) == car.get(LedSpriteProperty.X)) {
             game.setScore(Math.round(score))
             game.gameOver()
         }
