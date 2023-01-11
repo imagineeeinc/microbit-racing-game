@@ -23,8 +23,8 @@ input.onButtonPressed(Button.B, function () {
     car.change(LedSpriteProperty.X, 1)
 })
 let emptyObstaclesX = 0
-let ticks = 0
 let score = 0
+let ticks = 0
 let car: game.LedSprite = null
 basic.showNumber(3)
 basic.pause(250)
@@ -37,6 +37,12 @@ basic.pause(250)
 car = game.createSprite(2, 4)
 car.set(LedSpriteProperty.Blink, 300)
 let obstacles: game.LedSprite[] = []
+music.startMelody(music.builtInMelody(Melodies.Chase), MelodyOptions.ForeverInBackground)
+basic.forever(function () {
+    if (ticks % 3 == 0) {
+        serial.writeValue("score", Math.round(score))
+    }
+})
 basic.forever(function () {
     while (obstacles.length > 0 && obstacles[0].get(LedSpriteProperty.Y) == 4) {
         obstacles.removeAt(0).delete()
@@ -59,6 +65,7 @@ basic.forever(function () {
     for (let value2 of obstacles) {
         if (value2.get(LedSpriteProperty.Y) == car.get(LedSpriteProperty.Y) && value2.get(LedSpriteProperty.X) == car.get(LedSpriteProperty.X)) {
             game.setScore(Math.round(score))
+            music.stopMelody(MelodyStopOptions.Background)
             game.gameOver()
         }
     }
