@@ -1,12 +1,6 @@
 input.onButtonPressed(Button.A, function () {
     car.change(LedSpriteProperty.X, -1)
 })
-input.onGesture(Gesture.LogoUp, function () {
-    game.resume()
-})
-input.onGesture(Gesture.ScreenUp, function () {
-    game.resume()
-})
 input.onGesture(Gesture.ScreenDown, function () {
     game.pause()
 })
@@ -69,5 +63,5 @@ basic.forever(function () {
             game.gameOver()
         }
     }
-    basic.pause(700)
+    basic.pause(500)
 })
