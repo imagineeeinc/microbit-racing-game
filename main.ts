@@ -22,7 +22,7 @@ input.onGesture(Gesture.Shake, function () {
     if (nitrousBar.length == 5) {
         speeding = true
         refreshRate = 50
-        imunity = 5
+        imunity = 10
     }
 })
 function start_scene () {
@@ -49,10 +49,12 @@ car = game.createSprite(2, 4)
 car.set(LedSpriteProperty.Blink, 300)
 let obstacles: game.LedSprite[] = []
 nitrousBar = []
-let defaultRefreshRate = 200
+let defaultRefreshRate = 300
 refreshRate = defaultRefreshRate
 speeding = false
 imunity = 0
+let defaultNitroMeterLevel = 25
+let nitroMeter = defaultNitroMeterLevel
 music.startMelody(music.builtInMelody(Melodies.Chase), MelodyOptions.ForeverInBackground)
 basic.forever(function () {
     if (ticks % 3 == 0) {
@@ -82,12 +84,15 @@ basic.forever(function () {
         ticks += 1
     }
     if (speeding == true) {
-        if (nitrousBar.length > 0) {
-            let list: number[] = []
-            nitrousBar.removeAt(list.length).delete()
+        while (nitrousBar.length > 0) {
+            nitrousBar.removeAt(nitrousBar.length - 1).delete()
+        }
+        if (nitroMeter != 0) {
+            nitroMeter += -1
         } else {
             refreshRate = defaultRefreshRate
             speeding = false
+            nitroMeter = defaultNitroMeterLevel
         }
     } else if (speeding == false) {
         if (imunity != 0) {
