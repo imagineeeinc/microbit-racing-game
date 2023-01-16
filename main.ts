@@ -49,7 +49,7 @@ car = game.createSprite(2, 4)
 car.set(LedSpriteProperty.Blink, 300)
 let obstacles: game.LedSprite[] = []
 nitrousBar = []
-let defaultRefreshRate = 500
+let defaultRefreshRate = 200
 refreshRate = defaultRefreshRate
 speeding = false
 imunity = 0
@@ -67,7 +67,7 @@ basic.forever(function () {
         for (let object of obstacles) {
             object.change(LedSpriteProperty.Y, 1)
         }
-        if (ticks % 3 == 0) {
+        if (ticks % 5 == 0) {
             emptyObstaclesX = randint(1, 4)
             for (let index = 0; index <= 4; index++) {
                 if (index != emptyObstaclesX && index != 0) {
@@ -79,6 +79,7 @@ basic.forever(function () {
             score += 1
             nitrous += 1
         }
+        ticks += 1
     }
     if (speeding == true) {
         if (nitrousBar.length > 0) {
@@ -93,7 +94,6 @@ basic.forever(function () {
             imunity += -1
         }
     }
-    ticks += 1
     if (4 < nitrous && nitrousBar.length < 5 && (speeding == false && imunity == 0)) {
         nitrous = 0
         nitrousBar.push(game.createSprite(0, 4 - nitrousBar.length))
